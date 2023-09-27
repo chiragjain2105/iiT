@@ -1,0 +1,45 @@
+.blogbutton{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 80vh;
+}
+.header{
+    /* border: 2px solid black; */
+    background-color: rgb(189, 181, 181);
+    margin-bottom: 1.1rem;
+    width: 100vw;
+    text-align: center;
+}
+.blog{
+    /* border: 2px solid black; */
+    width: 55%;
+    height: 100%;
+    margin: auto;
+}
+.buttons{
+    /* border: 2px solid black; */
+    width: 35%;
+    height: 100%;
+    margin: auto;
+}
+.allbutton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+.soundpdf{
+    display: flex;
+    width: 60%;
+    justify-content: space-evenly;
+}
+/* .logsign{
+    display: flex;
+    align-items: center;
+    width: 14%;
+    justify-content: space-evenly;    
+} */
