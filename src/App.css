@@ -37,9 +37,7 @@
     width: 60%;
     justify-content: space-evenly;
 }
-/* .logsign{
-    display: flex;
-    align-items: center;
-    width: 14%;
-    justify-content: space-evenly;    
-} */
+.blogText{
+    width:80%;
+    margin: auto;
+}

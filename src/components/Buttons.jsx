@@ -1,9 +1,10 @@
 import React from 'react'
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
+// import axios from 'axios';
 // import { Button } from '@mui/material';
 
-export default function Buttons({handleClickOpen}) {
+export default function Buttons({handleClickOpen,handleReset}) {
 
   return (
     <div className='allbutton'>
@@ -11,7 +12,7 @@ export default function Buttons({handleClickOpen}) {
             <button className='sound' style={{borderRadius:'200px'}}>
                 <VolumeUpIcon></VolumeUpIcon>
             </button>
-            <button className="pdf" style={{borderRadius:'200px'}}>
+            <button  className="pdf" style={{borderRadius:'200px'}}>
                 <FileUploadIcon></FileUploadIcon>
             </button>
         </div>
@@ -19,7 +20,7 @@ export default function Buttons({handleClickOpen}) {
             <button className="sbmt" onClick={handleClickOpen} style={{width:'100%'}}>Submit</button>
         </div>
         <div className="reset" style={{width:'100%'}}>
-            <button className="rst" style={{width:'100%'}}>Reset</button>
+            <button className="rst" onClick={handleReset} style={{width:'100%'}}>Reset</button>
         </div>
     </div>
   )
