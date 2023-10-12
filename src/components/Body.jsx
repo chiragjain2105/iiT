@@ -82,7 +82,7 @@ function Body({inputText,setInputText,handleReset}) {
                     <Blog inputText={inputText} setInputText={setInputText}></Blog>
                 </div>
                 <div className="buttons">
-                    <Buttons handleClickOpen={handleClickOpen} handleReset={handleReset}></Buttons>
+                    <Buttons handleClickOpen={handleClickOpen} handleReset={handleReset} setInputText={setInputText}></Buttons>
                 </div>
             </div>
         </div>
