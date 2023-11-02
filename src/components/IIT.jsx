@@ -49,15 +49,16 @@ function IIT() {
 
     return (
         <div>
-            <div className="header">
+            <div className="header_main" style={{margin:"0"}}>
                 <Header></Header>
             </div>
+      
             <Routes>
                 {/* <Route path='/' element={<Start />}>
                     <Route path='login' element={<Login username={username} setUsername={setUsername} userpassword={userpassword} setUserpassword={setUserpassword} handleLogin={handleLogin} ></Login>} />
                     <Route path='register' element={<Register></Register>} />
                 </Route> */}
-                 <Route path='/' element={<Login username={username} setUsername={setUsername} userpassword={userpassword} setUserpassword={setUserpassword} handleLogin={handleLogin} ></Login>}>
+                 <Route path='/' element={<Login  username={username} setUsername={setUsername} userpassword={userpassword} setUserpassword={setUserpassword} handleLogin={handleLogin} ></Login>}>
                     
                 </Route>
                 <Route path='/register' element={<Register></Register>} />
@@ -75,6 +76,7 @@ function IIT() {
                 </Route>
 
             </Routes>
+        
         </div>
     )
 }

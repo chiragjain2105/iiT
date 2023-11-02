@@ -77,7 +77,7 @@ function Body({inputText,setInputText,handleReset}) {
                 </DialogActions>
             </Dialog>
 
-            <div className='blogbutton'>
+            <div className='blogbutton' style={{marginTop:"34px"}}>
                 <div className="blog">
                     <Blog inputText={inputText} setInputText={setInputText}></Blog>
                 </div>

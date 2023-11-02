@@ -6,10 +6,10 @@ import { Button } from '@mui/material';
 
 export default function Header() {
   return (
-    <div className='header' style={{display:'flex', justifyContent:'space-between'}}>
+    <div className='header' style={{display:'flex', justifyContent:'space-between', margin:"0"}}>
         <div style={{width:'100%',margin:'auto'}}>
             <span style={{fontWeight:"bold", fontSize:"60px", fontFamily:"fantasy"}}>iiT&nbsp;</span>
-            <span style={{fontFamily:"cursive"}}>powered by LLM</span>
+            <span style={{fontFamily:"cursive"}}>powered by ChatGPT</span>
         </div>
         {/* <div className="logsign" style={{display:'flex', alignItems:'center', width:'14%', justifyContent: 'space-evenly'}}>
             <Button className="login" variant='outlined' color='success' style={{borderRadius:'5px', color:'#10a37f'}}><VpnKeyIcon></VpnKeyIcon></Button>
