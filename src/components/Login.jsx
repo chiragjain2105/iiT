@@ -185,7 +185,7 @@ function Login({ handleLogin, userpassword, username, setUserpassword, setUserna
         <Stack spacing={2} alignItems={"center"}>
 
         <img src="src\gpt_logo.jpg" alt="logo" width={40} height={40} />
-        <Typography sx={{ fontFamily: 'cursive' }}>Log in to iiT powered by chatGPT</Typography>
+        <Typography sx={{ fontFamily: 'cursive' }}>Log in to iiT powered by ChatGPT</Typography>
         </Stack>
         <Stack spacing={2}>
           <Stack direction="row" spacing={2} alignItems="center">

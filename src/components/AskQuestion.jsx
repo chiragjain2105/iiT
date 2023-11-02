@@ -34,7 +34,7 @@ function AskQuestion({ inputText }) {
 
 
     //////
-    //Define the data you want to send in the POST request
+   // Define the data you want to send in the POST request
     const postData = {
       question:text
     };

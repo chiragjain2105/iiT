@@ -33,7 +33,7 @@ function IIT() {
             console.log("check staut",response.data.loginStatus)
             if(response.data.loginStatus){
                 setAuthToken(response.data.loginStatus)
-                navigate("/iit")
+                navigate("/start")
             }
             else{
                 setAuthToken(false)
@@ -54,22 +54,15 @@ function IIT() {
             </div>
       
             <Routes>
-                {/* <Route path='/' element={<Start />}>
-                    <Route path='login' element={<Login username={username} setUsername={setUsername} userpassword={userpassword} setUserpassword={setUserpassword} handleLogin={handleLogin} ></Login>} />
-                    <Route path='register' element={<Register></Register>} />
-                </Route> */}
+                
                  <Route path='/' element={<Login  username={username} setUsername={setUsername} userpassword={userpassword} setUserpassword={setUserpassword} handleLogin={handleLogin} ></Login>}>
                     
                 </Route>
                 <Route path='/register' element={<Register></Register>} />
                 <Route path='/*' element={<NotFound />}></Route>
-                {/* <Route path='/iit' element={ <Body inputText={inputText} setInputText={setInputText} handleReset={handleReset} />}/> 
-                
-                  <Route path="/askQues" element={  <AskQuestion inputText={inputText} />} />
-                
-                */}
-                {/* <Route path='/iit' element={<Protected Component={` <Body inputText={inputText} setInputText={setInputText} handleReset={handleReset} />`}/> }/>
-                <Route path="/askQues" element={ <Protected Component={`<AskQuestion inputText={inputText} />`} />} /> */}
+                {/* new start page testing*/}
+                <Route path='/start' element={<Start/>}></Route>
+               
                 <Route element={<Protected authToken={authToken} />}>
                     <Route path='/iit' element={<Body inputText={inputText} setInputText={setInputText} handleReset={handleReset} />} />
                     <Route path="/askQues" element={<AskQuestion inputText={inputText} />} />
