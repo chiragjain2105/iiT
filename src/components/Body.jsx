@@ -17,7 +17,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function Body({inputText,setInputText,handleReset}) {
+function Body({inputText,setInputText,handleReset,setShowicon}) {
     const navigate = useNavigate()
     const [open, setOpen] = useState(false);
     // const [inputText,setInputText] = useState('');
@@ -52,6 +52,7 @@ function Body({inputText,setInputText,handleReset}) {
     };
 
     const handleProceed = () => {
+        setShowicon(false)
         navigate("/askQues")
      
     };

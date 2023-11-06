@@ -44,6 +44,32 @@
     width:80%;
     margin: auto;
 }
+/* docs css */
+
+/* .image-upload-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-upload-button {
+  background-color: yellow;
+  color: black;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+}
+
+.dropzone {
+  background-color: yellow;
+  border: 1px dashed black;
+  padding: 10px;
+  margin: 10px;
+} */
+
+
+
+
 
 /* like dislike */
 .like-button.clicked {

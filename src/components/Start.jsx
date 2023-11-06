@@ -95,7 +95,7 @@ const navigate =useNavigate()
    if(item===1)
    navigate("/iit")
   else
-  navigate("/doc")
+  navigate("/docs")
   };
 
   return (

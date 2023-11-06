@@ -9,9 +9,11 @@ import Register from './register';
 import NotFound from './NotFound';
 import Protected from './Protected';
 import axios from 'axios';
+import Docs from './Docs';
 
 
 function IIT() {
+    const [showicon, setShowicon] = useState(false);
     const [authToken, setAuthToken] = useState(false);
     const [inputText, setInputText] = useState('');
     const handleReset = () => {
@@ -60,12 +62,14 @@ function IIT() {
                 </Route>
                 <Route path='/register' element={<Register></Register>} />
                 <Route path='/*' element={<NotFound />}></Route>
-                {/* new start page testing*/}
-                <Route path='/start' element={<Start/>}></Route>
+                {/* new docs page testing*/}
+                {/* <Route path='/docs' element={<Docs/>}></Route> */}
                
                 <Route element={<Protected authToken={authToken} />}>
-                    <Route path='/iit' element={<Body inputText={inputText} setInputText={setInputText} handleReset={handleReset} />} />
-                    <Route path="/askQues" element={<AskQuestion inputText={inputText} />} />
+                <Route path='/start' element={<Start/>}></Route>
+                    <Route path='/iit' element={<Body inputText={inputText} setInputText={setInputText} handleReset={handleReset} setShowicon={setShowicon} />} />
+                    <Route path="/askQues" element={<AskQuestion inputText={inputText} showicon={showicon} />} />
+                    <Route path='/docs' element={<Docs setShowicon={setShowicon} setInputText={setInputText}/>}></Route>
                 </Route>
 
             </Routes>
