@@ -4,13 +4,15 @@ import ThumbDownTwoToneIcon from '@mui/icons-material/ThumbDownTwoTone';
 import ThumbUpTwoToneIcon from '@mui/icons-material/ThumbUpTwoTone';
 import InfoTwoToneIcon from '@mui/icons-material/InfoTwoTone';
 import React, { useState } from 'react'
+import LoadingBar from 'react-top-loading-bar'
 import axios from 'axios';
 
-function AskQuestion({ inputText,showicon }) {
+function AskQuestion({ inputText, showicon }) {
   // for like and dislike animation
   const [likeClicked, setLikeClicked] = useState(false);
   const [dislikeClicked, setDislikeClicked] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const [progress, setProgress] = useState(0)
 
   const handleLikeClick = () => {
     setLikeClicked(!likeClicked);
@@ -20,7 +22,8 @@ function AskQuestion({ inputText,showicon }) {
     setDislikeClicked(!dislikeClicked);
   };
 
-  const handleupdown =()=>{
+  const handleupdown = () => {
+    debugger
     setClicked(true);
   }
 
@@ -35,11 +38,13 @@ function AskQuestion({ inputText,showicon }) {
     debugger;
     //testing like and dislike button
     // alert("ask is clicked")
+    setProgress(progress + 70)
+
     // setAns("Testing Buttons Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto magnam nulla, impedit non et ut? Dolores quia unde nihil commodi consequatur laboriosam beatae ipsam cupiditate nisi quos quae quo neque itaque, suscipit voluptate amet dolor magnam illum doloribus aut vero.")
 
 
     //////
-   // Define the data you want to send in the POST request
+    //Define the data you want to send in the POST request
     const postData = {
       question:text
     };
@@ -49,6 +54,7 @@ function AskQuestion({ inputText,showicon }) {
       console.log(response)
       if(response.data){
         setAns(response.data.result)
+    setProgress(100)
       }
     }
     catch(error) {
@@ -65,53 +71,68 @@ function AskQuestion({ inputText,showicon }) {
     maxHeight: '7.2em', // Adjust the height as needed
   };
   return (
-    <Stack spacing={2} className='blogText' sx={{marginTop:"34px"}}>
-      <Typography variant='body1' sx={{ color: 'gray', fontFamily: 'cursive' }} style={blogStyle}>{inputText}</Typography>
-      {/* <Typography variant='h3' sx={{color:'black', fontFamily:'cursive', textAlign:'center', margin:'10px 0'}} >Ask Questions...</Typography> */}
+    <>
+      <LoadingBar
+        color='#f11946'
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
+      <Stack spacing={2} className='blogText' sx={{ marginTop: "34px" }}>
+        <Typography variant='body1' sx={{ color: 'gray', fontFamily: 'cursive' }} style={blogStyle}>{inputText}</Typography>
+        {/* <Typography variant='h3' sx={{color:'black', fontFamily:'cursive', textAlign:'center', margin:'10px 0'}} >Ask Questions...</Typography> */}
 
 
-      <TextField color='success' size='medium' fullWidth label="Ask Questions..." sx={{ color: 'black', fontFamily: 'cursive', textAlign: 'center' }} value={text} onChange={(e) => setText(e.target.value)} />
+        <TextField color='success' size='medium' fullWidth label="Ask Questions..." sx={{ color: 'black', fontFamily: 'cursive', textAlign: 'center' }} value={text} onChange={(e) => setText(e.target.value)} />
 
-      <Stack spacing={2} direction="row-reverse">
-        <button style={{ width: '100px' }} onClick={handleReset} >Reset</button>
-        <button style={{ width: '100px' }} onClick={handleAskQestion}>Ask</button>
-      </Stack>
-      {/* main */}
-      {/* {(ans!="")&&  <Typography variant='body1' sx={{ color: 'gray', fontFamily: 'cursive' }}>{ans}</Typography>} */}
-      {/* testing */}
-{/* {clicked!=true ?<> {(ans != "") ? <>    <Typography variant='body1' sx={{ color: 'gray', fontFamily: 'cursive' }}>{ans}</Typography>
-      {ans !=" " && <Stack direction={"row"} spacing={0} sx={{ justifyContent: "center", alignItems: "center" }}>
-          <Typography variant='caption' sx={{ color: 'gray', fontFamily: 'cursive' }}>Is this answer helpful so far?</Typography>
-          <button style={{ border: "none", background: "none" }} className={`like-button ${likeClicked ? 'clicked' : ''}`}
-            onClick={handleLikeClick}><IconButton onClick={handleupdown}><ThumbUpTwoToneIcon /></IconButton></button>
-          <button className={`dislike-button ${dislikeClicked ? 'clicked' : ''}`}
-            onClick={handleDislikeClick} style={{ border: "none", background: "none" }}><IconButton onClick={handleupdown}><ThumbDownTwoToneIcon /></IconButton></button>
+        <Stack spacing={2} direction="row-reverse">
+          <button style={{ width: '100px' }} onClick={handleReset} >Reset</button>
+          <button style={{ width: '100px' }} onClick={handleAskQestion}>Ask</button>
+        </Stack>
+        {/* main */}
+        {/* {(ans!="")&&  <Typography variant='body1' sx={{ color: 'gray', fontFamily: 'cursive' }}>{ans}</Typography>} */}
+        {/* testing */}
+        {(ans != "") ? <>    <Typography variant='body1' sx={{ color: 'gray', fontFamily: 'cursive' }}>{ans}</Typography>
+          {ans != " " && <>
+            <Stack direction={"row"} spacing={0} sx={{ justifyContent: "center", alignItems: "center" }}>
+              {(clicked != true) ? <>
+                <Typography variant='caption' sx={{ color: 'gray', fontFamily: 'cursive' }}>Is this answer helpful so far?</Typography>
+                <button style={{ border: "none", background: "none" }} className={`like-button ${likeClicked ? 'clicked' : ''}`}
+                  onClick={handleLikeClick}><IconButton onClick={handleupdown}><ThumbUpTwoToneIcon /></IconButton></button>
+                <button className={`dislike-button ${dislikeClicked ? 'clicked' : ''}`}
+                  onClick={handleDislikeClick} style={{ border: "none", background: "none" }}><IconButton onClick={handleupdown}><ThumbDownTwoToneIcon /></IconButton></button>
+              </> :
+                <Typography fontFamily={"cursive"}>thanks for feedback!!!</Typography>
+              }
 
-{showicon&& <button style={{ border: "none", background: "none" }}><IconButton><InfoTwoToneIcon /></IconButton> </button>}
-          
 
-        </Stack>}
-        </> : null}</>:
-        <Typography fontFamily={"cursive"}>thanks for feedback!!!</Typography>
-        } */}
+              {showicon && <button style={{ border: "none", background: "none" }}><IconButton><InfoTwoToneIcon /></IconButton> </button>}
 
-      {(ans != "") ? <>    <Typography variant='body1' sx={{ color: 'gray', fontFamily: 'cursive' }}>{ans}</Typography>
-      {ans !=" " && <Stack direction={"row"} spacing={0} sx={{ justifyContent: "center", alignItems: "center" }}>
-          <Typography variant='caption' sx={{ color: 'gray', fontFamily: 'cursive' }}>Is this answer helpful so far?</Typography>
-          <button style={{ border: "none", background: "none" }} className={`like-button ${likeClicked ? 'clicked' : ''}`}
-            onClick={handleLikeClick}><IconButton onClick={handleupdown}><ThumbUpTwoToneIcon /></IconButton></button>
-          <button className={`dislike-button ${dislikeClicked ? 'clicked' : ''}`}
-            onClick={handleDislikeClick} style={{ border: "none", background: "none" }}><IconButton onClick={handleupdown}><ThumbDownTwoToneIcon /></IconButton></button>
 
-{showicon&& <button style={{ border: "none", background: "none" }}><IconButton><InfoTwoToneIcon /></IconButton> </button>}
-          
-
-        </Stack>}
+            </Stack>
+          </>}
         </> : null}
 
 
 
-    </Stack>
+
+        {/* {(ans != "") ? <>    <Typography variant='body1' sx={{ color: 'gray', fontFamily: 'cursive' }}>{ans}</Typography>
+        {ans != " " && <Stack direction={"row"} spacing={0} sx={{ justifyContent: "center", alignItems: "center" }}>
+          <Typography variant='caption' sx={{ color: 'gray', fontFamily: 'cursive' }}>Is this answer helpful so far?</Typography>
+          <button style={{ border: "none", background: "none" }} className={`like-button ${likeClicked ? 'clicked' : ''}`}
+            onClick={handleLikeClick}><IconButton onClick={handleupdown}><ThumbUpTwoToneIcon /></IconButton></button>
+          <button className={`dislike-button ${dislikeClicked ? 'clicked' : ''}`}
+            onClick={handleDislikeClick} style={{ border: "none", background: "none" }}><IconButton onClick={handleupdown}><ThumbDownTwoToneIcon /></IconButton></button>
+
+          {showicon && <button style={{ border: "none", background: "none" }}><IconButton><InfoTwoToneIcon /></IconButton> </button>}
+
+
+        </Stack>}
+      </> : null} */}
+
+
+
+      </Stack>
+    </>
   )
 }
 
