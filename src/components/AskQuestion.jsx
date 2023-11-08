@@ -13,18 +13,22 @@ function AskQuestion({ inputText, showicon }) {
   const [dislikeClicked, setDislikeClicked] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [progress, setProgress] = useState(0)
+  const [loading, setLoading] = useState(false)
 
   const handleLikeClick = () => {
-    setLikeClicked(!likeClicked);
+    setLikeClicked(true);
   };
 
   const handleDislikeClick = () => {
-    setDislikeClicked(!dislikeClicked);
+    setDislikeClicked(true);
   };
 
   const handleupdown = () => {
     debugger
-    setClicked(true);
+    setTimeout(function () {
+      setClicked(true);
+    }, 1000);
+
   }
 
   const [text, setText] = useState('');
@@ -34,7 +38,7 @@ function AskQuestion({ inputText, showicon }) {
     setAns("");
   }
   const handleAskQestion = async () => {
-
+    setLoading(true)
     debugger;
     //testing like and dislike button
     // alert("ask is clicked")
@@ -55,6 +59,7 @@ function AskQuestion({ inputText, showicon }) {
       if(response.data){
         setAns(response.data.result)
     setProgress(100)
+    setLoading(false)
       }
     }
     catch(error) {
@@ -77,7 +82,26 @@ function AskQuestion({ inputText, showicon }) {
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
       />
+
+      {/* trying new loading code */}
+
+      {/* <Stack direction={"row"} spacing={0.5} justifyContent={"center"}>
+            <div className='loading' style={{width:"10px",height:"10px" ,borderRadius:"5px" }}></div>
+            <div className='loading1' style={{width:"10px",height:"10px" ,borderRadius:"5px" }}></div>
+            <div className='loading2' style={{width:"10px",height:"10px" ,borderRadius:"5px" }}></div>
+          </Stack> */}
+
+
+      {/* end */}
+
+     
+
+
+
+
       <Stack spacing={2} className='blogText' sx={{ marginTop: "34px" }}>
+
+
         <Typography variant='body1' sx={{ color: 'gray', fontFamily: 'cursive' }} style={blogStyle}>{inputText}</Typography>
         {/* <Typography variant='h3' sx={{color:'black', fontFamily:'cursive', textAlign:'center', margin:'10px 0'}} >Ask Questions...</Typography> */}
 
@@ -91,7 +115,16 @@ function AskQuestion({ inputText, showicon }) {
         {/* main */}
         {/* {(ans!="")&&  <Typography variant='body1' sx={{ color: 'gray', fontFamily: 'cursive' }}>{ans}</Typography>} */}
         {/* testing */}
-        {(ans != "") ? <>    <Typography variant='body1' sx={{ color: 'gray', fontFamily: 'cursive' }}>{ans}</Typography>
+
+        {loading== true? <>
+        <Stack direction={"row"} spacing={0.5} justifyContent={"center"}>
+            <div className='loading' style={{width:"10px",height:"10px" ,borderRadius:"5px" }}></div>
+            <div className='loading1' style={{width:"10px",height:"10px" ,borderRadius:"5px" }}></div>
+            <div className='loading2' style={{width:"10px",height:"10px" ,borderRadius:"5px" }}></div>
+          </Stack>
+      </>:
+      <>
+       {(ans != "") ? <>    <Typography variant='body1' sx={{ color: 'gray', fontFamily: 'cursive' }}>{ans}</Typography>
           {ans != " " && <>
             <Stack direction={"row"} spacing={0} sx={{ justifyContent: "center", alignItems: "center" }}>
               {(clicked != true) ? <>
@@ -101,7 +134,7 @@ function AskQuestion({ inputText, showicon }) {
                 <button className={`dislike-button ${dislikeClicked ? 'clicked' : ''}`}
                   onClick={handleDislikeClick} style={{ border: "none", background: "none" }}><IconButton onClick={handleupdown}><ThumbDownTwoToneIcon /></IconButton></button>
               </> :
-                <Typography fontFamily={"cursive"}>thanks for feedback!!!</Typography>
+                <Typography variant='overline' fontFamily={"cursive"} className='animated-element '>thanks for feedback!!!</Typography>
               }
 
 
@@ -111,6 +144,12 @@ function AskQuestion({ inputText, showicon }) {
             </Stack>
           </>}
         </> : null}
+      
+      </>}
+
+
+
+       
 
 
 
