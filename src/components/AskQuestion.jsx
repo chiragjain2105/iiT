@@ -5,7 +5,22 @@ import ThumbUpTwoToneIcon from '@mui/icons-material/ThumbUpTwoTone';
 import InfoTwoToneIcon from '@mui/icons-material/InfoTwoTone';
 import React, { useState } from 'react'
 import LoadingBar from 'react-top-loading-bar'
+import CloseIcon from '@mui/icons-material/Close';
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 import axios from 'axios';
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2),
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(1),
+  },
+}));
 
 function AskQuestion({ inputText, showicon }) {
   // for like and dislike animation
@@ -14,6 +29,31 @@ function AskQuestion({ inputText, showicon }) {
   const [clicked, setClicked] = useState(false);
   const [progress, setProgress] = useState(0)
   const [loading, setLoading] = useState(false)
+  const [data,setData]=useState("")
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = async() => {
+    setOpen(true);
+    debugger
+    try {
+      var response = await axios.get('http://localhost:8000/pdf_sources/')
+      console.log(response)
+     
+      if(response.data){
+        console.log("response",response.data)
+        setData(response.data)
+      }
+     
+    }
+    catch(error) {
+      console.error('GET error:', error);
+    }
+
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleLikeClick = () => {
     setLikeClicked(true);
@@ -138,7 +178,7 @@ function AskQuestion({ inputText, showicon }) {
               }
 
 
-              {showicon && <button style={{ border: "none", background: "none" }}><IconButton><InfoTwoToneIcon /></IconButton> </button>}
+              {showicon && <button style={{ border: "none", background: "none" }}><IconButton  onClick={handleClickOpen}><InfoTwoToneIcon /></IconButton> </button>}
 
 
             </Stack>
@@ -171,6 +211,49 @@ function AskQuestion({ inputText, showicon }) {
 
 
       </Stack>
+
+
+
+
+      {/* dialog code for info */}
+
+      <BootstrapDialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogTitle sx={{ m: 0, p: 2, fontFamily:"cursive",backgroundColor:"black", color:"white"  }} id="customized-dialog-title">
+          This Knowledge Nugget Has Been Mined From
+        </DialogTitle>
+        {/* <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton> */}
+        <DialogContent dividers>
+          <Typography gutterBottom fontFamily={"cursive"}>
+          Pdf : {data.pdf}
+          </Typography>
+          <Typography gutterBottom fontFamily={"cursive"}>
+         Page : {data.page}
+          </Typography>
+        
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose}>
+            Ok
+          </Button>
+        </DialogActions>
+      </BootstrapDialog>
+
+
     </>
   )
 }

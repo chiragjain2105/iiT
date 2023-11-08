@@ -66,9 +66,9 @@ function Body({inputText,setInputText,handleReset,setShowicon}) {
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle>{"Your input has been abducted by our data-loving aliens"}</DialogTitle>
+                <DialogTitle sx={{backgroundColor:"black", color:"white",fontFamily:"cursive"}}>{"Your input has been abducted by our data-loving aliens"}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-slide-description">
+                    <DialogContentText id="alert-dialog-slide-description" fontFamily={"cursive"} my={1}>
                         Click Proceed to Ask Questions....
                     </DialogContentText>
                 </DialogContent>
