@@ -37,7 +37,7 @@ export default function Buttons({ handleClickOpen, handleReset, setInputText }) 
             }
         }
         else {
-            alert("upload kr le ")
+            alert("upload kr le l$*@ ")
         }
     }
     return (

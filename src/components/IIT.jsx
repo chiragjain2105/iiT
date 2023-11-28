@@ -10,9 +10,11 @@ import NotFound from './NotFound';
 import Protected from './Protected';
 import axios from 'axios';
 import Docs from './Docs';
+import { Alert } from '@mui/material';
 
 
 function IIT() {
+    const [alert,setAlert]=useState("")
     const [showicon, setShowicon] = useState(false);
     const [authToken, setAuthToken] = useState(false);
     const [inputText, setInputText] = useState('');
@@ -36,9 +38,12 @@ function IIT() {
             if(response.data.loginStatus){
                 setAuthToken(response.data.loginStatus)
                 navigate("/start")
+                setUserpassword("")
+                setUsername("")
             }
             else{
                 setAuthToken(false)
+                setAlert(response.data.detail)
                 alert(response.data.detail)
             }
             console.log("1",authToken)
@@ -52,7 +57,8 @@ function IIT() {
     return (
         <div>
             <div className="header_main" style={{margin:"0"}}>
-                <Header></Header>
+                <Header setAuthToken={setAuthToken}></Header>
+                {alert!==""&&<Alert onClose={() => {}} severity='error'>{alert}</Alert>}
             </div>
       
             <Routes>
